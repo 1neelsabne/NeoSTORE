@@ -1,0 +1,18 @@
+.bgimage {
+	background-image: linear-gradient(
+			rgba(0, 0, 0.1, 0.1),
+			rgba(0, 0, 0.5, 0.5)
+		),
+		url("../images/bg2.jpg");
+	min-height: auto;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	padding: 20px;
+}
+
+.dropdown-basic-button,
+.dropdown-toggle,
+.dropdown-menu {
+	width: 100% !important;
+}

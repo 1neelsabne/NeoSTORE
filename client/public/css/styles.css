@@ -1,0 +1,139 @@
+.navf {
+    font-size: 14px;
+    margin-left: 38%;
+}
+
+.jt {
+    padding: 30px;
+    background-color: #E0E0E0;
+    margin-top: 27px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+.rw {
+    padding-top: 20px;
+}
+
+.colh {
+    border-radius: 0px;
+    height: 20px;
+}
+
+.lis {
+    font-size: 14px;
+    /* color: black; */
+}
+
+.lis a {
+    color: black;
+}
+
+.lis a:hover {
+    color: blue;
+}
+
+.activ {
+    color: lightseagreen;
+}
+
+.marb {
+    margin-bottom: 20px;
+}
+
+.pdd {
+    padding: 20px;
+}
+
+.checked {
+    color: orange;
+}
+
+.bor {
+    margin-left: 15px;
+    height: 130px;
+    width: 90%;
+    border: 1px solid rgb(216, 209, 209);
+}
+
+.carousel-caption {
+    margin-top: 30px;
+}
+
+.col1 {
+    background: #3B5998;
+    padding: 20px;
+}
+
+.col2 {
+    background: #55ACEE;
+    padding: 20px;
+}
+
+.col3 {
+    background: #f40083;
+    padding: 20px;
+}
+
+.col4 {
+    background: #ea4c89;
+    padding: 20px;
+}
+
+.col5 {
+    background: #cb2027;
+    padding: 20px;
+}
+
+.an {
+    text-decoration: none;
+    color: white;
+
+}
+
+.br {
+    border: 1px solid white;
+    border-radius: 50%;
+    width: 25px;
+}
+
+.bl {
+    background-color: rgb(17, 17, 17);
+    padding: 30px;
+}
+
+.it {
+    color: gray;
+    margin: auto;
+    width: 80%;
+}
+
+.bt {
+    margin-top: -25px;
+    font-size: 40px;
+    margin-bottom: -10px;
+}
+
+.b {
+    width: 10px;
+    color: blue;
+}
+
+.r {
+    width: 10px;
+    color: red;
+}
+
+.y {
+    width: 10px;
+    color: yellow;
+}
+
+.ft {
+    padding: 10px;
+    background-color: #E0E0E0;
+}
+
+.nb {
+    background-color: #E0E0E0;
+}
