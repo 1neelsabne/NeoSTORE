@@ -1,6 +1,7 @@
 // Importing Required Packages and Libraries
 
 import nodemailer from "nodemailer";
+//import "dotenv/config";
 import { USER_EMAIL, USER_PASS } from "./info.js";
 
 // function for Sending OTP through Email

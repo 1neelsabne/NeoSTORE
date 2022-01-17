@@ -3,13 +3,11 @@
 import mongoose from "mongoose";
 import "colors";
 
-const db = "mongodb://localhost:27017/NeoSTORE";
-
 // Function for Creating Connection to Database
 
 const connectDB = async () => {
 	try {
-		await mongoose.connect(db, {
+		await mongoose.connect(process.env.DB_CON, {
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
 		});

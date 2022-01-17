@@ -2,27 +2,25 @@
 
 import express from "express";
 import connectDB from "../config/dbCon.js";
-import userRouter from "../routes/userRoutes.js";
-import cors from "cors";
 import "colors";
-import productRouter from "../routes/productRoutes.js";
-import orderRouter from "../routes/orderRoutes.js";
+import routes from "../routes/index.js";
+import "dotenv/config";
 
 const app = express();
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 
 // Function for Creating Server Prot
 
 const nodeServer = () => {
-	app.use(express.json());
-	app.use(express.urlencoded({ extended: true }));
-	app.use(cors());
-	//app.use(express.static("../invoices"));
-	app.use("/api/v1", userRouter);
-	app.use("/api/v1", productRouter);
-	app.use("/api/v1", orderRouter);
+	// Calling routes function
+
+	routes(app);
+
+	// Calling Mongo DB Connect function
 
 	connectDB();
+
+	// Listening Port
 
 	app.listen(PORT, (err) => {
 		if (err) throw err;
