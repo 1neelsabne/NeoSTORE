@@ -1,16 +1,12 @@
 // Importing Required Packages and Libraries
 
 import userModel from "../models/userModel.js";
-import bcrypt, { hash } from "bcrypt";
+import bcrypt from "bcrypt";
 import { sendOtp } from "../services/nodeMailer.js";
 import { authenticator } from "otplib";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 authenticator.options = { epoch: Date.now(), step: 30, window: 0 };
-
-// JWT secret Key
-
-const sKey = "komal@neel@jeff@madhuri@vinayak@anushka";
 
 // Exporting all Controllers Related to User
 
@@ -32,7 +28,7 @@ export const userLogin = (req, res) => {
 							res.send({
 								message: "Google login Successfull!",
 								// userDet: det,
-								token: jwt.sign(payload, sKey, {
+								token: jwt.sign(payload, process.env.S_KEY, {
 									expiresIn: 10600000000000,
 								}),
 							});
@@ -43,7 +39,7 @@ export const userLogin = (req, res) => {
 							res.send({
 								message: "Facebook login Successfull!",
 								// userDet: det,
-								token: jwt.sign(payload, sKey, {
+								token: jwt.sign(payload, process.env.S_KEY, {
 									expiresIn: 10600000000000,
 								}),
 							});
@@ -68,9 +64,13 @@ export const userLogin = (req, res) => {
 								res.send({
 									message: "Login Successfull!",
 									// userDet: det,
-									token: jwt.sign(payload, sKey, {
-										expiresIn: 10600000000000,
-									}),
+									token: jwt.sign(
+										payload,
+										process.env.S_KEY,
+										{
+											expiresIn: 10600000000000,
+										}
+									),
 								});
 							} else {
 								if (user.provider !== undefined) {

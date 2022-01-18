@@ -85,3 +85,19 @@ export const filterProduct = (req, res) => {
 		res.send("Reqest Body is Blank");
 	}
 };
+
+export const searchProduct = (req, res) => {
+	let name = new RegExp(req.params.name, "i");
+	productModel.find({ product_name: name }, { __v: 0 }, (err, result) => {
+		if (result) {
+			if (result.length > 0) {
+				res.send({ flg: 1, result: result });
+			} else {
+				res.send({ flg: 0, message: "No result found" });
+			}
+			// console.log(result);
+		} else {
+			res.send(err);
+		}
+	});
+};

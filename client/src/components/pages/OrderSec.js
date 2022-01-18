@@ -6,12 +6,19 @@ import NavBar from "../NavBar";
 import { Row, Container, Card, Col, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
-import { downInvoice, getOrderDetail } from "../../config/productServices";
+import {
+	deleteOrder,
+	downInvoice,
+	getOrderDetail,
+} from "../../config/productServices";
+import { ToastContainer, toast } from "react-toastify";
 
 // Defining Functional Component
 
 function OrderSec() {
 	const navigate = useNavigate();
+	const [refresh, setRefresh] = useState(false);
+
 	useEffect(() => {
 		if (localStorage.getItem("_token")) {
 			const decode = jwtDecode(localStorage.getItem("_token"));
@@ -23,13 +30,21 @@ function OrderSec() {
 					console.log(err);
 				});
 		} else {
-			navigate("/log-in");
+			toast.error(`Please login first`, {
+				position: "top-left",
+				autoClose: 5000,
+				theme: "dark",
+			});
+
+			setTimeout(() => {
+				navigate("/log-in");
+			}, 3000);
 		}
 		// if (localStorage.getItem("mycart")) {
 		// 	const info = JSON.parse(localStorage.getItem("mycart"));
 		// 	info.forEach((item) => dispatch(addToCart()));
 		// }
-	}, [navigate]);
+	}, [navigate, refresh]);
 
 	const [orderdata, setOrderdata] = useState([]);
 
@@ -42,7 +57,11 @@ function OrderSec() {
 				if (res.data.flg === 1) {
 					// loadingInvoice();
 
-					alert(res.data.message);
+					toast.success(`${res.data.message}`, {
+						position: "top-left",
+						autoClose: 5000,
+						theme: "dark",
+					});
 					// window.location.href = res.data.path;
 					console.log(res.data.path);
 					//window.open(res.data.path, "_blank");
@@ -50,6 +69,28 @@ function OrderSec() {
 					link.href = res.data.path;
 					link.download = "invo.pdf";
 					link.dispatchEvent(new MouseEvent("click"));
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+
+	// Function for Cancelling Orders
+
+	const cancelOrder = (id, index) => {
+		console.log(id);
+		deleteOrder(id)
+			.then((res) => {
+				if (res.data.flg === 1) {
+					// let data = [...orderdata];
+					// data.splice(index, 0);
+					setRefresh(true);
+					toast.success(`${res.data.message}`, {
+						position: "top-left",
+						autoClose: 5000,
+						theme: "dark",
+					});
 				}
 			})
 			.catch((err) => {
@@ -141,6 +182,19 @@ function OrderSec() {
 												>
 													Download Invoice as PDF
 												</Button>
+												&nbsp;&nbsp;
+												<Button
+													variant="danger"
+													size="lg"
+													onClick={() =>
+														cancelOrder(
+															main._id,
+															index
+														)
+													}
+												>
+													Cancel Order
+												</Button>
 											</Col>
 											<Col md={6}>
 												<h3 className="text-right">
@@ -158,6 +212,7 @@ function OrderSec() {
 				</Container>
 			</section>
 			<FooterSec />
+			<ToastContainer newestOnTop />
 		</>
 	);
 }

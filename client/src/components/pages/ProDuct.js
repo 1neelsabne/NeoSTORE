@@ -1,6 +1,6 @@
 // Importing Required Packages and Libraries
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
 	Button,
 	Col,
@@ -8,8 +8,10 @@ import {
 	DropdownButton,
 	Dropdown,
 	Card,
+	FormControl,
 } from "react-bootstrap";
 import {
+	findProduct,
 	getCommonProduct,
 	getFilterProduct,
 	getProdColor,
@@ -29,6 +31,7 @@ function ProDuct() {
 	const [product, setProduct] = useState([]);
 	const [catName, setCatName] = useState([]);
 	const [prodcolor, setProdcolor] = useState([]);
+	const srch = useRef();
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
@@ -171,6 +174,26 @@ function ProDuct() {
 			});
 	};
 
+	// Function for Surching Products
+
+	const searchProducts = () => {
+		findProduct(srch.current.value)
+			.then((res) => {
+				if (res.data.flg === 1) {
+					setProduct(res.data.result.sort(() => Math.random() - 0.5));
+				} else {
+					toast.error(`${res.data.message}`, {
+						position: "top-right",
+						autoClose: 5000,
+						theme: "dark",
+					});
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+
 	// Rendering HTML Elements and Designing Part
 
 	return (
@@ -196,6 +219,28 @@ function ProDuct() {
 				</Row>
 				<Row className="ml-3 mr-3 mt-3">
 					<Col md={3}>
+						<Row>
+							<Col md={8}>
+								<FormControl
+									type="text"
+									placeholder="Search..."
+									className="w-100"
+									ref={srch}
+								/>
+							</Col>
+							<Col md={4} className="w-100">
+								<Button
+									type="submit"
+									className="w-100"
+									variant="warning"
+									onClick={() => searchProducts()}
+								>
+									<i className="fa fa-search" />
+									&nbsp; Search
+								</Button>
+							</Col>
+						</Row>
+						<br />
 						<Button
 							style={{ width: "100%" }}
 							variant="info"

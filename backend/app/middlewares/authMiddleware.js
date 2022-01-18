@@ -1,7 +1,6 @@
 // JWT Authentivation Token Verifire
 
 import jwt from "jsonwebtoken";
-const sKey = "komal@neel@jeff@madhuri@vinayak@anushka";
 
 const authenticateToken = (req, res, next) => {
 	const authHeader = req.headers["authorization"];
@@ -10,7 +9,7 @@ const authenticateToken = (req, res, next) => {
 	if (token == null) {
 		res.send({ message: "Token not match" });
 	} else {
-		jwt.verify(token, sKey, (err, data) => {
+		jwt.verify(token, process.env.S_KEY, (err, data) => {
 			if (err) {
 				res.send({ message: "Token incorrect" });
 			} else {

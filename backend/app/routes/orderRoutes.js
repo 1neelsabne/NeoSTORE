@@ -2,6 +2,7 @@
 
 import express from "express";
 import {
+	cancelOrders,
 	downloadInvo,
 	genInvoice,
 	orderDetail,
@@ -19,5 +20,7 @@ orderRouter.get("/get-order/:email", orderInfo);
 orderRouter.post("/invoice", genInvoice);
 
 orderRouter.get("/download", downloadInvo);
+
+orderRouter.delete("/cancel-order/:id", cancelOrders);
 
 export default orderRouter;

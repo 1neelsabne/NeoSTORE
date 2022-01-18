@@ -69,3 +69,13 @@ export const downloadInvo = (req, res) => {
 		console.log(err);
 	});
 };
+
+export const cancelOrders = (req, res) => {
+	orderModel.findOneAndDelete({ _id: req.params.id }, (err, result) => {
+		if (result) {
+			res.send({ flg: 1, message: "Order Cancelled" });
+		} else {
+			res.send(err);
+		}
+	});
+};

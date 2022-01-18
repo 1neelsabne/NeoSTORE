@@ -35,10 +35,18 @@ export const getOrderDetail = (email) => {
 	return axios.get(`${MAIN_URL}/get-order/${email}`);
 };
 
+export const deleteOrder = (id) => {
+	return axios.delete(`${MAIN_URL}/cancel-order/${id}`);
+};
+
 export const downInvoice = (data) => {
 	return axios.post(`${MAIN_URL}/invoice`, data);
 };
 
 export const loadingInvoice = () => {
 	return axios.get(`${MAIN_URL}/download`);
+};
+
+export const findProduct = (name) => {
+	return axios.get(`${MAIN_URL}/search-product/${name}`);
 };
